@@ -1,0 +1,31 @@
+Command Substitution and Expressions
+
+There are two mechanisms for substituting the result of an operation into a command:
+$ ls -l ‘which --skip-alias emacs‘
+$ ls -l $(which --skip-alias emacs)
+
+The second form permits nesting, while the first form does not. Note that the first form has “backticks” (‘) not apostrophes.
+
+Arithmetic expressions may be evaluated in two different ways, using the expr utility, or the $((..)) syntax:
+
+For x=3:
+
+Arithmetic Expression Evaluation Forms
+
+
+Expression	Gives
+(base) lindangulopez@dell-Latitude-E5440:~$ x=3
+(base) lindangulopez@dell-Latitude-E5440:~$ echo $x + 1
+3 + 1
+(base) lindangulopez@dell-Latitude-E5440:~$ echo $(expr $x + 1)
+4
+(base) lindangulopez@dell-Latitude-E5440:~$ echo $(expr $x+1)
+3+1
+(base) lindangulopez@dell-Latitude-E5440:~$ echo $((x+1))
+4
+(base) lindangulopez@dell-Latitude-E5440:~$ echo $(($x + 1 ))
+4
+
+The $((..)) syntax is more modern and preferred; expr is less efficient, as it invokes an external program and is trickier to use.
+
+Note that $var, $(cmd), ‘cmd‘, and $((...)) all expand inside double quotes.

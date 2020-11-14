@@ -1,0 +1,29 @@
+Redirection
+
+File descriptors:
+
+    0 = stdin
+    1 = stdout
+    2 = stderr
+
+less < file same as less file or less 0< file
+
+foo > file ; redirect stdout (same as foo 1> file)
+
+foo 2> file ; redirect stderr
+
+foo >> file ; append stdout to file
+
+foo >& file or foo > file 2>&1;
+
+sends stdout and stderr to a file, but foo >>& file does not work ; you have to do foo >> file 2>&1
+
+Note that foo > file 2>&1 is not the same as foo 2>&1 > file; the order of arguments is important.
+
+A nice non-portable trick you can use in Linux is to take advantage of the device nodes:
+
+/dev/stdin
+/dev/stdout
+/dev/stderr
+
+$ foo > /dev/stderr

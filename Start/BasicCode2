@@ -1,0 +1,22 @@
+(base) lindangulopez@dell-Latitude-E5440:~$ type clear
+clear is /home/lindangulopez/anaconda3/bin/clear
+(base) lindangulopez@dell-Latitude-E5440:~$ type cd
+cd is a shell builtin
+(base) lindangulopez@dell-Latitude-E5440:~$ echo $PATH
+/home/lindangulopez/anaconda3/bin:/home/lindangulopez/anaconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Adding a Directory to Your $PATH
+
+You can use the export command to add a directory to the $PATH. The directory is then included in the list of file system locations the shell searches. When the shell finds a matching executable, it stops searching, so you want to make sure it searches your directory first, before /usr/local/bin.
+
+This is easy to do. For our example, we type the following to add our directory to the start of the path so it’s the first location searched:
+
+(base) lindangulopez@dell-Latitude-E5440:~$ export PATH=/home/lindangulopez/Documents/Work:$PATH
+(base) lindangulopez@dell-Latitude-E5440:~$ echo $PATH
+/home/lindangulopez/Documents/Work:/home/lindangulopez/anaconda3/bin:/home/lindangulopez/anaconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+To add our directory to the end of the path, we just move it to the end of the command, like so:
+(base) lindangulopez@dell-Latitude-E5440:~$ export PATH=$PATH:/home/lindangulopez/Documents/Work
+(base) lindangulopez@dell-Latitude-E5440:~$ echo $PATH
+/home/lindangulopez/Documents/Work:/home/lindangulopez/anaconda3/bin:/home/lindangulopez/anaconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/lindangulopez/Documents/Work
+
+
