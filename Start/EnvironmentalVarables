@@ -1,0 +1,70 @@
+Besides the aesthetic value of having a prettier prompt than the default value, embedding more information in the prompt can be quite useful. In the example given we have shown:
+
+    The machine name - this is useful if you run command line windows on remote machines from your desktop; you can always tell where you are, and this can avoid many errors.
+    The user name - this is particularly important if you are running as a superuser (root) and can help you avoid errors where you take what you think is a benign action and wind up crippling your system.
+    The current directory - it is always important to know where you are. You certainly do not want to do something like rm * in the wrong directory.
+
+Here is a table with some of the possible special characters that can be embedded in the PS1 string:
+Here is a table with some of the possible special characters that can be embedded in the PS1 string:
+Character	Meaning	Example Output
+\t	Time in HH:MM:SS	08:43:40
+\d	Date in ”Weekday Month Date”	Fri Mar 12
+\n	Newline	
+\s	Shell name	bash
+\w	Current working directory	/usr/local/bin
+\W	Basename of current working directory	bin
+\u	User	coop
+\h	Hostname	c7
+\#	Command number (this session)	43
+\!	History number (in history file)	1057
+
+Note you can embed any other string you like in the prompt.
+
+
+Customizing the Command Line Prompt
+
+Customizing the command line prompt is as simple as modifying the value of the environment variable PS1. For example, to set it to display the hostname, user and current directory:
+
+The default command line prompt is $ for normal users and # for the root or superuser.
+
+$ PS1="\h:\u:\w>"
+c7:coop:/tmp>
+
+
+
+///////////////////////////////////////////////////////////////////
+Environment Variables
+
+Environment variables are not limited in length or number. Lots of applications use them, for instance, in order to set default values for configuration options.
+
+Examples include HOME, HOST, PATH, and can be set as in PATH: PATH=$HOME/bin:$PATH for example.
+
+Note: Putting ./ in your path is a security risk; an unfriendly user might substitute an executable which could be quite harmful. However, if you are on a single user system, you may want to violate this recommendation.
+
+Type env (or export) to get a list of presently exported environment variables, set to get the complete set of variables.
+
+Some variables to set (use whatever values make sense for you!):
+EDITOR=/usr/bin/emacs
+CD_PATH=$HOME:/tmp
+LS_COLORS="......"
+PAGER=/usr/bin/less
+HISTSIZE=1000
+
+An environment variable must be exported to propagate its value to a child process. You can do either of the following:
+$ VAR=value ; export VAR
+$ export VAR=value
+
+You can also make one or more environment variables take effect for just one command:
+
+$ LD_LIBRARY_PATH=$PWD DEBUG=3 ./foobar
+
+(base) lindangulopez@dell-Latitude-E5440:~$ alias
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls --color=auto'
+

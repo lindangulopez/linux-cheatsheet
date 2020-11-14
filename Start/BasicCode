@@ -1,0 +1,132 @@
+emacs Commands
+
+Here are some of the most important commands that are used in emacs.
+Starting, Exiting, Reading and Writing Files in emacs
+Command	Description
+emacs myfile	Start emacs and edit myfile
+Ctl-x i	Insert prompted for file at current position
+Ctl-x s	Write out the file keeping current name
+Ctl-x Ctl-w	Write out the file giving a new name when prompted
+Ctl-x Ctl-s	Write out all files currently being worked on and exit
+Ctl-x Ctl-c	Exit after being prompted if there any unwritten modified files
+
+
+Changing Position in emacs
+Command	Description
+arrow keys	Use the arrow keys for up, down, left and right; or:
+Ctl-n	One line down
+Ctl-p	One line up
+Ctl-f	One character left
+Ctl-b	One character right
+Ctl-a	Move to beginning of line
+Ctl-e	Move to end of line
+M-f	Move to beginning of next word
+M-b	Move back to beginning of preceding word
+M-<	Move to beginning of file
+M-x goto-line n	Move to line n
+M->	Move to end of file
+Ctl-v or PageDown	Move forward one page
+M-v or PageUp	Move backward one page
+Ctl-l	Refresh and center screen
+
+
+Searching for Text in emacs
+Command	Description
+Ctl-s	Search forward for prompted for pattern, or for next pattern
+Ctl-r	Search backwards for prompted for pattern, or for next pattern
+
+
+Changing, Adding and Deleting Text in emacs
+Command	Description
+Ctl-o	Insert a blank line
+Ctl-d	Delete character at current position
+Ctl-k	Delete the rest of the current line
+Ctl-_ or Ctl-x u	Undo the previous operation
+Ctl-space	Mark the beginning of the selected region; the end will be at the cursor position
+Ctl-w	Yank (cut) the current marked region and put it in buffer
+Ctl-y	Paste at the current position the yanked line or lines from the buffer
+
+////////////////////////////////////////////////////////////////
+
+vi Commands
+
+Below you can see some of the most important vi commands.
+Starting, Exiting, Reading and Writing Files in vi
+Command	Description
+vi myfile	Start vi and edit myfile
+vi -r myfile	Start vi and edit myfile in recovery mode from a system crash
+:r file2<RET>	Read in file2 and insert at current position
+:w<RET>	Write out the file
+:w myfile<RET>	Write out the file to myfile
+:w! file2<RET>	Overwrite file2
+:x<RET> or :wq<RET>	Exit vi and write out modified file
+:q<RET>	Quit vi
+:q!<RET>	Quit vi even though modifications have not been saved
+
+Command	Description
+arrow keys	Use the arrow keys for up, down, left and right; or:
+j or <RET>	One line down
+k	One line up
+h or Backspace	One character left
+l or Space	One character right
+0	Move to beginning of line
+$	Move to end of line
+w	Move to beginning of next word
+b	Move back to beginning of preceding word
+:0 <RET> or 1G	Move to beginning of file
+:n <RET> or nG	Move to line n
+:$ <RET> or G	Move to last line in file
+^f or PageDown	Move forward one page
+^b or PageUp	Move backward one page
+^l	Refresh and center screen
+
+Searching for Text in vi
+Command	Description
+/pattern<RET>	Search forward for pattern
+n	Move to next occurrence of search pattern
+string<RET>	Search backward for pattern
+N	Move to previous occurrence of search pattern
+
+Changing, Adding and Deleting Text in vi
+Command	Description
+a	Append text after cursor; stop upon Escape key
+A	Append text at end of current line; stop upon Escape key
+i	Insert text before cursor; stop upon Escape key
+I	Insert text at beginning of current line; stop upon Escape key
+o	Start a new line below current line, insert text there; stop upon Escape key
+O	Start a new line above current line, insert text there; stop upon Escape key
+r	Replace character at current position
+R	Replace text starting with current position; stop upon Escape key
+x	Delete character at current position
+Nx	Delete N characters, starting at current position
+dw	Delete the word at the current position
+D	Delete the rest of the current line
+dd	Delete the current line
+Ndd or dNd	Delete N lines
+u	Undo the previous operation
+yy	Yank (cut) the current line and put it in buffer
+Nyy or yNy	Yank (cut) N lines and put it in buffer
+p	Paste at the current position the yanked line or lines from the buffer
+//////////////////////////////////////////////////////
+
+either of which produces a file which has in it:
+line one
+line two
+line three
+
+This sort of game is often played from scripts.
+
+A second way is to use cat combined with redirection:
+$ cat  << EOF > myfile
+> line one
+> line two
+> line three
+> EOF $
+
+If you just want to create a file, without even doing an editor, there are two standard ways to just create one from the command line and fill it with content.
+
+The first is to just use echo repeatedly:
+$ echo line one > myfile
+$ echo line two >> myfile
+$ echo line three >> myfile
+///////////////////////////////////////////////////

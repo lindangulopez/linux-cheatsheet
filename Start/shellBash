@@ -1,0 +1,51 @@
+Initialization
+Interactive shells
+
+Login shells:
+
+    if /etc/profile exists, source it
+    if ~/.bash_profile exists, source it
+    else if ~/.bash_login exists, source it
+    else if ~/.profile exists, source it
+    on exit, if ~/.bash_logout exists, source it
+
+Non-login shells:
+
+    if ~/.bashrc exists, source it
+
+Non-interactive shells
+
+Despite what the man page says, it seems to be the same as interactive shells.
+
+Note that by default, most distributions include a system-wide file (usually /etc/bashrc) from the user’s ~/.bashrc.
+
+
+Kinds of shells
+
+    A login shell is one requiring a password (logging in)
+    An interactive shell is one in which the standard input/output streams are connected to terminals
+    A non-interactive shell is one in which the standard input/output streams may be connected to a process, etc.
+
+
+Linux provides a wide choice of shells; exactly what is available to use is listed in /etc/shells; e.g. on one system we get:
+
+# /etc/shells: valid login shells
+/bin/sh
+/bin/bash
+/bin/rbash
+/bin/dash
+
+//////////////////////////////////////////////////////////////////////
+
+The #!/bin/bash at the beginning of the script should be familiar to anyone who has developed any kind of script in UNIX environments. Following the magic #! characters goes the name of whatever scripting language interpreter is tasked with executing the following lines. Choices include /usr/bin/perl, /bin/bash, /bin/csh, /usr/bin/python and /bin/sh.
+
+at the command line accomplishes the same thing as running the following script:
+#!/bin/bash
+find . -name "*.c" -ls
+
+
+A shell is a command line interpreter which can constitute the user interface for terminal windows. It can also be used as a mechanism to run scripts, even in non-interactive sessions without a terminal window, as if the commands were being typed in.
+
+For example, typing:
+
+$ find . -name "*.c" -ls
