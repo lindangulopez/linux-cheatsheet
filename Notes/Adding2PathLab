@@ -1,0 +1,29 @@
+Adding to the Path (Lab)
+
+Create a simple executable file with the name ls in your current directory, which we will assume to be /tmp:
+
+$ cd /tmp
+$ echo echo Hello, This is MY ls program > ls
+$ chmod +x ls
+
+You can run this directly by doing:
+$ ./ls
+
+but just typing ls will bring up the normal /bin/ls, which can be verified by typing which ls.
+
+If you do:
+
+$ export PATH=/tmp:$PATH
+
+then typing ls will bring up your program no matter where you are sitting on the filesystem.
+
+///////////////////WARNING//////////////////////////////////////////////////////////////////
+
+This is different than doing:
+$ export PATH=./:$PATH
+which puts the current directory first in the path, no matter where you are, or
+$ export PATH=$CWD:$PATH
+
+which will put the current working directory at this time in your future path.
+
+Prepending your current directory to the path is generally a bad idea, as it makes trojan horses easy to implement.

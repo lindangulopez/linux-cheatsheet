@@ -1,0 +1,188 @@
+Partitions
+
+Under Linux, disks are divided into partitions; the term slices is not often used, but when it is, it is used interchangeably with the term partitions.
+
+Up to four primary partitions can be created and information stored about them in the MBR (Master Boot Record). More flexibility can be obtained by creating up to three primary partitions and an extended partition, which can contain as many logical partitions as can be accommodated, which may depend on the type of disk involved. For example, SCSI disks can have only up to sixteen partitions.
+
+The Linux kernel discovers all pre-attached hard disks during system boot, and there is normally no configuration files required to inform about what is present. In hotplug situations, the udev system will find disks upon insertion in the system and read in their partition tables.
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+The fdisk utility can be used to create and remove partitions and change their type.
+
+Note that fdisk does not allow you to move partitions or resize them. Resizing has to be done in two steps; if you are increasing, you have to increase the size of the partition, and then increase the filesystem size (for example, with resize2fs); if you are decreasing the size, you have to decrease the size of the filesystem and then the partition.
+
+Partitions can be formatted for various filesystems with the mkfs command, or more usually, with specific commands for each type of filesystem. For example, either of the two following commands:
+
+$ sudo mkfs -t ext4 /dev/sda10
+$ sudo mkfs.ext4 /dev/sda10
+
+will place an ext4 filesystem on /dev/sda10 with default options.
+
+The gparted utility (and some equivalents) let you do all these operations in a graphical user-friendly manner. Starting this up (as root) gives:
+https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/ypdVUMNSEeigRwoONiJejg_c459d987f065cbd39de488e39f13a193_gparted.png?expiry=1605484800000&hmac=f8aSNMykuHK36zsYfYTJ6PCnGjHHtJB1EtGFOkD6T_8
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+The command line utility for creating and examining hard disk partitions is fdisk; to see all currently attached device, you can do:
+
+(base) lindangulopez@dell-Latitude-E5440:~$ sudo /sbin/fdisk -l
+[sudo] password for lindangulopez: 
+Disk /dev/loop0: 818.22 MiB, 857964544 bytes, 1675712 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop1: 818.16 MiB, 857903104 bytes, 1675592 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop2: 9.7 MiB, 9510912 bytes, 18576 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop3: 97.72 MiB, 102445056 bytes, 200088 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop4: 55.33 MiB, 58007552 bytes, 113296 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop5: 97.76 MiB, 102486016 bytes, 200168 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop6: 55.37 MiB, 58052608 bytes, 113384 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop7: 140.9 MiB, 147722240 bytes, 288520 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sda: 298.9 GiB, 320072933376 bytes, 625142448 sectors
+Disk model: TOSHIBA MQ01ACF0
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+Disklabel type: dos
+Disk identifier: 0xdcfc0203
+
+Device     Boot Start       End   Sectors   Size Id Type
+/dev/sda1  *     2048 625141759 625139712 298.1G 83 Linux
+
+
+
+
+Disk /dev/loop8: 34.66 MiB, 36323328 bytes, 70944 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop9: 255.58 MiB, 267980800 bytes, 523400 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop10: 217.92 MiB, 228478976 bytes, 446248 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop11: 140.67 MiB, 147488768 bytes, 288064 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop12: 3.72 MiB, 3887104 bytes, 7592 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop13: 125.87 MiB, 131960832 bytes, 257736 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop14: 88.84 MiB, 93130752 bytes, 181896 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop15: 60.10 MiB, 63942656 bytes, 124888 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop16: 50.69 MiB, 53133312 bytes, 103776 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop17: 149.89 MiB, 157151232 bytes, 306936 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop18: 231.29 MiB, 242515968 bytes, 473664 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop19: 2.17 MiB, 2273280 bytes, 4440 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop20: 16.32 MiB, 17104896 bytes, 33408 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop21: 62.9 MiB, 65105920 bytes, 127160 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop22: 67.58 MiB, 70844416 bytes, 138368 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop23: 91.7 MiB, 96137216 bytes, 187768 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+(base) lindangulopez@dell-Latitude-E5440:~$ 
+
+

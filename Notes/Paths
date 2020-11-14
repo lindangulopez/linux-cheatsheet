@@ -1,0 +1,47 @@
+Paths
+
+The path is a critical aspect of your environment, and is encapsulated in the PATH environment variable. On an RHEL 7 system for a user named student, we get:
+
+$ echo $PATH
+/usr/lib64/qt-3.3/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:\
+/usr/local/sbin:/usr/sbin:/home/student/.local/bin:/home/student/bin
+
+(Note we have had to split the path across across two lines in the output.)
+
+When a user tries to run a program, the path is searched (from left to right) until an executable program or script is found with that name. You can see what would be found with the which command, as in:
+
+$ which --skip-alias emacs
+/usr/bin/emacs
+
+Note that if there was a /usr/local/bin/emacs, it would be executed instead, since it is earlier in the path.
+
+It is easy to add directories to your path, as in:
+$ MY_BIN_DIR=$HOME/my_bin_dir
+$ export PATH=$MY_BIN_DIR:$PATH
+$ export PATH=$PATH:$MY_BIN_DIR
+
+with the first form prepending your new directory and the second appending it to the path.
+
+Note that the current directory is noted by ./ and the directory up one level by ../.
+
+The current directory is never placed in the path by default. Thus, if you want to run foobar in the current directory, you must say:
+
+$ ./foobar
+
+for it to work.
+
+You can save changes to your path by putting them in your shell initialization file, .bashrc in your home directory.
+
+https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/N--NtcNWEeiZjg4gmeu3pg_7a08b5a11bfd9cded2b04d4b0e3d450d_setpath.png?expiry=1605484800000&hmac=u8ppQi_XAdR8_xb7XUOso5zwbno_cRiVk6zD7IQjS9I
+
+Another useful path variable is CDPATH which is searched when you change directories. For example:
+$ cd bin
+-bash: cd: usr: No such file or directory
+$ export CDPATH=/usr:$CDPATH
+$ cd bin
+/usr/bin
+
+
+
+
+
