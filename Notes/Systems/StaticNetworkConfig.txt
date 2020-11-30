@@ -1,0 +1,49 @@
+Static Configuration of a Network Interface (Lab)
+Exercise
+
+Note: You may have to use a different network interface name than eth0. Also note that you can most easily do this 
+exercise with nmtui or your system’s graphical interface. We will present a command line solution, but beware, details 
+may not exactly fit your distribution flavor or fashion.
+
+    Show your current IP address and default route for eth0.
+    /*
+    $ ip addr show eth0
+    */
+    or
+    /*
+     $ ifconfig eth0
+    */
+    
+    2. Assuming the address was 192.168.1.100: 
+    Bring down eth0 and reconfigure to use a static address instead of DCHP, using the information you just recorded. 
+        /*
+$ sudo ip link set eth0 down 
+$ sudo ip addr add 192.168.1.100 dev eth0 
+$ sudo ip link set eth0 up
+    */
+    
+    or
+    
+    /*
+    $ sudo ifconfig eth0 down 
+$ sudo ifconfig eth0 up 192.168.1.100
+    */
+    
+    Bring the interface back up.
+        /*
+    $ sudo ifconfig eth0 down 
+$ sudo ifconfig eth0 up 192.168.1.100
+
+    */
+    
+    or 
+    /*
+    $ sudo ifconfig eth0 up 
+$ sudo dhclient eth0
+    */
+    Make sure your configuration works after a reboot.
+        /*
+    $ sudo reboot
+    */
+
+You will probably want to restore your configuration when you are done.
