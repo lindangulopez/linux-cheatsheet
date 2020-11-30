@@ -1,0 +1,54 @@
+System Runlevels
+
+Here is a table summarizing the levels:
+Runlevel	Meaning
+S, s	Same as 1
+0	Shutdown system and turn power off
+1	Single user mode
+2	Multiple user, no NFS, only text login
+3	Multiple user, with NFS and network, only text login
+4	Not used
+5	Multiple user, with NFS and network, graphical login with X
+6	Reboot
+
+The current runlevel can be simply displayed with the runlevel command, as in:
+
+/*
+$ runlevel
+N5
+
+*/
+where the first character is the previous level; N means unknown.
+
+telinit can be used to change the runlevel of the system. For example, to go from runlevel 3 to runlevel 5, type:
+/*
+$ sudo /sbin/telinit 5
+*/
+
+When the init process is started, the first thing it does is to read /etc/inittab. Historically, this file told init which 
+scripts to run to bring the system up each runlevel, and was done with a series of lines, one for each runlevel:
+/*
+id:runlevel(s):action:process
+*/
+where:
+
+    id: a unique 1-4 character identification for the entry
+    runlevel(s): zero or more single character or digit identifiers which identify which runlevel the action will be taken for
+    action: describes the action to be taken
+    process: specifies the process to be executed.
+
+However, in more recent systems, the only un-commented line and the only thing being set in this file is the default runlevel 
+with the line:
+
+/*
+id:5:initdefault
+*/
+
+
+This is the level to stop at when booting the system. However, if another value is specified on the kernel command line, init 
+ignores the default. This is done by simply appending the right integer to the kernel command line. The default level is usually 
+for a full multi-user, networked graphical system, or 3 for a server without a graphical interface.
+
+systemd-based systems do not use /etc/inittab at all, and just contain a file with no uncommented content, so as to not break 
+outdated scripts. However, some distributions still maintain the notion of runlevels, which are defined in terms of systemd targets, 
+and so you can use commands like the telinit one described earlier.
