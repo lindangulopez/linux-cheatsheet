@@ -1,0 +1,56 @@
+Networking and Network Interfaces (Cont.)
+
+To bring a network connection up and assign a static address, you can do:
+/*
+$ sudo /sbin/ifconfig eth0 up 192.168.1.100
+*/
+
+To bring it up and get it an assigned address from a DHCP server, you can do:
+/*
+$ sudo /sbin/ifconfig eth0 up
+$ sudo /sbin/dhclient eth0
+
+*/
+
+While ifconfig has been used reliably for many years, the ip utility is newer (and far more versatile). On a technical level, 
+it is more efficient because it uses netlink sockets, rather than ioctl system calls.
+
+ip can be used for a wide variety of tasks. It can be used to display and control devices, routing, policy-based routing, and tunneling. 
+The basic syntax is:
+
+/*
+ip [ OPTIONS ] OBJECT { COMMAND | help }
+*/
+
+Some examples:
+
+    Show information for all network interfaces:
+    /*
+$ ip link
+*/
+
+    Show information for the eth0 network interface:
+    /*
+$ ip -s link show eth0
+*/
+
+    Set the IP address for eth0:
+    /*
+$ sudo ip addr add 192.168.1.7 dev eth0
+*/
+
+    Bring eth0 down:
+    /*
+$ sudo ip link set eth0 down
+*/
+
+    Set the MTU to 1480 bytes for eth0:
+    /*
+$ sudo ip link set eth0 mtu 1480
+*/
+
+    Set the networking route:
+    /*
+$ sudo ip route add 172.16.1.0/24 via 192.168.1.5
+*/
+
