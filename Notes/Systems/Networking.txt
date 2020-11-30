@@ -1,0 +1,24 @@
+Networking and Network Interfaces
+
+The vast majority of network programming in Linux is done using the socket interface. Thus, standards-compliant programs should require little 
+massage to work properly with Linux.
+
+Note, however, there are many enhancements and new features in the Linux networking implementation, such as new kinds of address and protocol 
+families. For example, Linux offers the netlink interface, which permits opening up socket connections between kernel sub-systems and applications 
+(or other kernel sub-systems). This has been effectively deployed to implement firewall and routing applications.
+
+Historically, the wired Ethernet network devices have been known by a name such as eth0, eth1, etc., while wireless devices have had names like 
+wlan0, wlan1, etc.
+
+Basic information about active network interfaces on your system is gathered through the ifconfig utility:
+/*
+$ /sbin/ifconfig
+
+*/
+Information displayed includes information about the hardware MAC address, the MTU (maximum transfer unit), and the IRQ the device is tied to. 
+Also displayed are the number of packets and bytes transmitted, received, or resulting in errors.
+
+This machine has two network cards bound to eth0 and eth1, and the loopback interface, lo, which handles network traffic bound to the machine. 
+Note you can see the statistical information in abbreviated form by looking at /proc/net/dev, and in one quantity per line display 
+in /sys/class/net/eth0/statistics:
+
