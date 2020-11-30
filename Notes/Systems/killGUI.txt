@@ -1,0 +1,20 @@
+Killing the Graphical User Interface (Lab)
+
+From within a graphical terminal (gnome-terminal, konsole, etc.), we kill the current graphical desktop.
+
+Your method will depend on your distribution, your greeter program (gdm, lightdm, kdm), and whether you have a SysVinit or systemd system.
+
+First, we will bring down the GUI, which, depending on your system, will be done with one of the following commands:
+/*
+$ sudo systemctl stop gdm
+$ sudo telinit 3
+*/
+
+Now, we restart the GUI from the text console with one of the following commands:
+
+/*
+
+$ sudo systemctl start gdm
+$ sudo telinit 5
+
+*/
