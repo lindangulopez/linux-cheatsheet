@@ -1,0 +1,114 @@
+[Memory](http://people.redhat.com/drepper/cpumemory.pdf)
+Linux uses a virtual memory system (VM), as do all modern operating systems: the virtual memory is larger than the physical memory.
+
+Each process has its own, protected address space. Addresses are virtual and must be translated to and from physical addresses by the kernel whenever a process needs to access memory.
+
+The kernel itself also uses virtual addresses; however the translation can be as simple as an offset depending on the architecture and the type of memory being used.
+
+The kernel allows fair shares of memory to be allocated to every running process, and coordinates when memory is shared among processes. In addition, mapping can be used to link a file directly to a process’s virtual address space. Furthermore, certain areas of memory can be be protected against writing and/or code execution.
+
+The free utility gives a very terse report on free and used memory in your system:
+
+where the options cause the output to be expressed in MB’s. See man free to see possible options.
+
+This system has 16 GB of RAM and a 8 GB swap partition. At the moment, this snapshot was taken the system was pretty inactive and not doing all that much. Yet, the amount of memory being used is appreciable (if you include the memory assigned to the cache).
+
+However, a lot of the memory being used is in the page cache, most of which is being used to cache the contents of files that have recently been accessed. If this cache is released, the memory usage will decrease significantly. This can be done by doing (as root user):
+
+If we had only wanted to drop the page cache, we would have echoed a 1, not a 3; we have also dropped the dentry and inode caches, which is why the freed memory is more than that released from the page cache.
+
+A more detailed look can be obtained by looking at /proc/meminfo:
+
+The output will depend somewhat on kernel version, and you should not write scripts that overly depend on certain fields being in this file.
+
+In the following diagram (for 32-bit platforms), the first 3 GB of virtual addresses are used for user-space memory and the upper GB is used for kernel-space memory. Other architectures have the same setup, but differing values for PAGE_OFFSET; for 64-bit platforms, the value is in the stratosphere.
+
+While Linux permits up to 64 GB of memory to be used on 32-bit systems, the limit per process is a little less than 3 GB. This is because there is only 4 GB of address space (i.e. it is 32-bit limited) and the topmost GB is reserved for kernel addresses. The little is somewhat less than 3 GB because of some address space being reserved for memory-mapped devices. 
+
+It is important to remember that applications do not write directly to storage media such as disks; they interface with the virtual memory system and data blocks written are generally first placed into cache or buffers, and then are flushed to disk when it is either convenient or necessary. Thus, in most systems, more memory is used in this buffering/caching layer than for direct use by applications for other purposes.
+
+For a comprehensive review, see Ulrich Drepper’s article "What Every Programmer Should Know About Memory". This covers many issues in depth, such as proper use of cache, alignment, NUMA, virtualization, etc. 
+
+Managing the memory on 32-bit machines with large amounts of memory (especially over 4 GB) is far more complex than it is in 64-bit systems.
+
+It is hard to think of a good reason to be acquiring purely 32-bit hardware anymore for use as heavy iron; there is still plenty of use for 32-bit systems in the embedded world, etc., but there memory is not expected to be large enough to complicate memory management.
+
+Of course, you may be running 32-bit applications on 64-bit hardware, and that may lead occasionally to questions which may be subtle.
+
+However, to keep things simple, we will not focus on 32-bit systems with a lot of memory, as they are more and more becoming dinosaurs.
+
+/*
+(base) lindangulopez@dell-Latitude-E5440:~$ runlevel
+N 5
+(base) lindangulopez@dell-Latitude-E5440:~$ free -mt
+              total        used        free      shared  buff/cache   available
+Mem:           7867        2750         602         239        4514        4590
+Swap:          2047         175        1872
+Total:         9915        2925        2475
+(base) lindangulopez@dell-Latitude-E5440:~$ sudo su
+[sudo] password for lindangulopez: 
+root@dell-Latitude-E5440:/home/lindangulopez# free -mt
+              total        used        free      shared  buff/cache   available
+Mem:           7867        2747         601         242        4518        4591
+Swap:          2047         175        1872
+Total:         9915        2922        2474
+root@dell-Latitude-E5440:/home/lindangulopez# exit
+exit
+(base) lindangulopez@dell-Latitude-E5440:~$ cat /proc/meminfo
+MemTotal:        8056512 kB
+MemFree:          627488 kB
+MemAvailable:    4712396 kB
+Buffers:          762956 kB
+Cached:          3432264 kB
+SwapCached:         7608 kB
+Active:          4145084 kB
+Inactive:        2503272 kB
+Active(anon):    1937040 kB
+Inactive(anon):   754144 kB
+Active(file):    2208044 kB
+Inactive(file):  1749128 kB
+Unevictable:       65816 kB
+Mlocked:             112 kB
+SwapTotal:       2097148 kB
+SwapFree:        1917728 kB
+Dirty:                28 kB
+Writeback:             8 kB
+AnonPages:       2513756 kB
+Mapped:           517168 kB
+Shmem:            248072 kB
+KReclaimable:     431336 kB
+Slab:             596240 kB
+SReclaimable:     431336 kB
+SUnreclaim:       164904 kB
+KernelStack:       15728 kB
+PageTables:        34224 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     6125404 kB
+Committed_AS:    9851580 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:       44340 kB
+VmallocChunk:          0 kB
+Percpu:             4528 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:     1060764 kB
+DirectMap2M:     7231488 kB
+DirectMap1G:     1048576 kB
+(base) lindangulopez@dell-Latitude-E5440:~$
+*/
+
+
