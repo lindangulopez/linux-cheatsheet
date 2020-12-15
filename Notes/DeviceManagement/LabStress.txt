@@ -6,15 +6,18 @@ A newer enhanced version of stress (called stress-ng) is also available and has 
 
 All major distributions now have both of these programs in their repositories, so you should be able to do one of the following:
 
-
+$ sudo yum install stress stress-ng
+$ sudo dnf install stress stress-ng
+$ sudo apt-get install stress stress-ng
+$ sudo zypper install stress stress-ng
 stress-ng is backwards compatible with stress, so wherever we use stress from here on, you can substitute stress-ng:
 
-
+$ stress-ng --help
 for a quick list of options.
 
 As an example, the command:
 
-
+$ stress -c 8 -i 4 -m 6 -t 20s
 will:
 
 Fork off 8 CPU-intensive processes, each spinning on an sqrt() calculation.
@@ -27,11 +30,9 @@ Now, begin to put stress on the system. The exact numbers you use will depend on
 
 For example, doing:
 
-
+$ stress -m 4 -t 20s
 which puts only a memory stressor on the system, is likely to take up all your CPU time.
 
 Play with combinations of the switches and see how they impact each other. In succeeding sessions, we will be able to use the stress program to simulate various high load conditions.
 
-Solution
-lab_stress.sh
-stress-1.0.4.tar.gz
+Solution: see, lab_stress.sh & download, stress-1.0.4.tar.gz
