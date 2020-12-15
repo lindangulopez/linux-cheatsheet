@@ -1,0 +1,47 @@
+Managing System Services
+Every operating system has services which are usually started on system initialization and often remain running until shutdown. Such services may be started, stopped, or restarted at any time, generally requiring root privilege.
+
+All relatively new Linux distributions have adopted the systemd method, which does most of the work with the systemctl utility.
+
+Most older distributions, such as RHEL 6, use the service and chkconfig utilities. While older Debian-based systems use *rc-* programs, they also have versions of service and/or chkconfig available for install.
+
+Generally speaking, systemd-based systems maintain backwards compatibility wrappers so one can use the older commands.
+
+For this reason, we will only discuss in detail the systemd methods.
+
+For an excellent summary of how to go from SysVinit to systemd, see the SysVinit to systemd Cheatsheet.
+
+With systemd, all service management is done with the systemctl utility. Its basic syntax is:
+
+$ systemctl [options] command [name]
+We will provide some examples next.
+
+To show the status of everything systemd controls, do:
+
+$ systemctl
+Show all available services:
+
+$ systemctl list-units -t service --all
+Show only active services:
+
+$ systemctl list-units -t service
+To start (activate) one or more units:
+
+$ sudo systemctl start foo
+$ sudo systemctl start foo.service
+$ sudo systemctl start /path/to/foo.service
+where a unit can be a service or a socket.
+
+To stop (deactivate):
+
+$ sudo systemctl stop foo.service
+These commands are equivalent to sudo service foo start|stop .
+
+Enable/disable a service:
+
+$ sudo systemctl enable sshd.service
+$ sudo systemctl disable sshd.service
+This is the equivalent of chkconfig on|off and does not actually start the service.
+
+Note that some systemctl commands in the above examples can be run as non-root user, others require running as root or with sudo. Furthermore, in most cases, you can omit the .service from the service name.
+
