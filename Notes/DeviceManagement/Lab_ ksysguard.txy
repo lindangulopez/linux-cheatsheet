@@ -1,0 +1,26 @@
+Installing and Running ksysguard (Lab)
+You may already have ksysguard installed; check by doing:
+
+$ which ksysguardd
+If not, you will have to install and it is recommended you use your distributor’s packaging system, as installing from source can be a little tricky due to all the development headers and libraries required.
+
+On Red Hat-based systems, you need:
+
+$ sudo yum install ksysguard*
+On SUSE, you will need to do:
+
+$ sudo zypper install kdebase4-workspace
+On Ubuntu/Debian systems, the appropriate command is:
+
+$ sudo apt-get install ksysguard
+Of course, depending on your exact Linux distribution and version, there might be some variation of these names. You should be able to find the right package name through the appropriate graphical package management utilities if necessary.
+
+The following instructions should work with any version of ksysguard, but the graphical interface will vary somewhat according to version and Linux distribution.
+
+Launch ksysguard. Click on File > New Worksheet and then Edit > Properties to control the number of rows and columns and the update frequency.
+
+You can control what sensors you want to display by clicking on your machine name in the left pane and then dragging and dropping choices to the worksheet windows.
+
+Note that you can display multiple sensors of similar type within a given window, including those of different CPU’s or cores.
+
+If you have more than one machine available, you can display at the same time by selecting File > Connect Host. However, the other machine must be running a very similar version of ksysguard for this to work.
