@@ -1,0 +1,37 @@
+Using stress (Lab)
+Exercise
+From time to time, it will be useful to us to stress the system by making the CPU labor, wasting memory, or kicking up I/O activity. The appropriately named stress utility is a C language program written by Amos Waterland at the University of Oklahoma under the GPL v2. It is designed to place a configurable amount of stress by generating various kind of workloads on any kind of POSIX system.
+
+A newer enhanced version of stress (called stress-ng) is also available and has an almost infinite number of options, including over 105 stress tests.
+
+All major distributions now have both of these programs in their repositories, so you should be able to do one of the following:
+
+
+stress-ng is backwards compatible with stress, so wherever we use stress from here on, you can substitute stress-ng:
+
+
+for a quick list of options.
+
+As an example, the command:
+
+
+will:
+
+Fork off 8 CPU-intensive processes, each spinning on an sqrt() calculation.
+Fork off 4 I/O-intensive processes, each spinning on sync().
+Fork off 6 memory-intensive processes, each spinning on malloc(), allocating 256 MB by default. The size can be changed as in --vm-bytes 128M.
+Run the stress test for 20 seconds.
+After installing stress, start up your system’s graphical system monitor, which you can find on your application menu, or run from the command line, which is probably gnome-system-monitor or ksysguard. Later, we will consider these in some detail.
+
+Now, begin to put stress on the system. The exact numbers you use will depend on your system’s resources, such as the number of CPUs and RAM size.
+
+For example, doing:
+
+
+which puts only a memory stressor on the system, is likely to take up all your CPU time.
+
+Play with combinations of the switches and see how they impact each other. In succeeding sessions, we will be able to use the stress program to simulate various high load conditions.
+
+Solution
+lab_stress.sh
+stress-1.0.4.tar.gz
