@@ -1,0 +1,33 @@
+Installing a New Repository on a Red Hat and CentOS (Lab)
+
+Enterprise Linux distributors often offer only a relatively small subset of the total number of packages available and the versions 
+supported are often not the latest cutting edge ones.
+
+This is done to permit better control over package interaction as the potential number of problems tends to rise rather dramatically 
+as more software is included.
+
+However, there are many software packages that are well-understood and probably can be added without big problems. While one can always 
+install from source, binary packages are much easier to deal with.
+
+NOTE: This lab can only be done on a RHEL or CentOS system.
+https://fedoraproject.org/wiki/EPEL
+For Red Hat Enterprise Linux installations (including CentOS), a handy resource is the EPEL repository (Extra Packages for Enterprise 
+Linux). For the most part these are packages which have been used on Fedora systems, which are very similar to the current Red Hat 
+system, and are expected to install cleanly and play well with the rest of the software on the system, although no technical support 
+can be provided. 
+
+To install the EPEL repository, you need to download the RPM file from the EPEL repository, selecting the version appropriate for your 
+major release version.
+
+You can then install as in:
+$ sudo rpm -Uvh epel-release*.noarch.rpm
+
+or, to be explicit:
+$ sudo rpm -Uvh epel-release-7.5.noarch.rpm
+
+You will notice this creates a file, /etc/yum.repos.d/epel.repo which you should examine, as it is a template for how other repositories 
+can be added.
+
+You may already have the EPEL repository installed; for example, if you are using a Linux Foundation CentOS virtual machine. In such a 
+case, just make sure you know how to obtain the RPM file and examine /etc/yum.repos.d/epel.repo.
+
