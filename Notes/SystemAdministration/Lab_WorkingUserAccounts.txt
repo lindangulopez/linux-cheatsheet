@@ -1,0 +1,16 @@
+Working with User Accounts (Lab)
+
+Create a user1 account using useradd.
+
+Log in as user1 using ssh or su or sudo. For example, you can just do this with:
+$ ssh user1@localhost
+
+It should fail, because you need a password for user1; it was never established.
+
+Set the password for user1 to user1pw and then try to log in again as user1.
+
+Look at the new records which were created in the /etc/passwd and /etc/group.
+
+Look at the /etc/default/useradd file and see what the current defaults are set to. Also look at the /etc/login.defs file.
+
+Create a user account for user2 which will use the Korn shell (ksh) as its default shell. (If you do not have /bin/ksh, install it or use the C shell at /bin/csh.) Set the password to user2pw.
