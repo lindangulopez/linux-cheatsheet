@@ -1,0 +1,11 @@
+Learning Objectives
+
+    Describe the available methods and choices for installing a Linux distribution.​
+    Define the role of packaging systems and know the main commands for installation, removal, updating and upgrading components and entire systems.
+    Discuss the function of user home directories and know where they are located.
+    Find the various logging files that monitor and record system activity.
+    Explain the relationships of users and groups on UNIX-like operating systems.​
+    Add, remove, and modify the properties of user accounts.
+    Add, remove, and modify the group properties of user accounts.
+    Examine and set the read/write/execute access rights of files, respecting ownership and group membership.
+    Explain the role of the root account and the use of both su and sudo.
