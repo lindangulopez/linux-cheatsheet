@@ -1,6 +1,6 @@
 #Files, Users, and Permissions
 
-Suppose you have a file and obtain a detailed listing of its properties:
+#Suppose you have a file and obtain a detailed listing of its properties:
 $ ls -lF file
 #-rwxr-x--x 1 coop coop 42 Jun 18 13:59 some_file*
 
