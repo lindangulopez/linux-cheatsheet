@@ -1,0 +1,21 @@
+User Directories, Environments, etc.
+
+On Linux systems, user directories are conventionally placed under /home, as in /home/coop, /home/student, etc. All personal configuration, 
+data, and executable programs are placed in this directory hierarchy.
+
+On other UNIX-like operating systems, the concept of the /home directory tree exists, but can be subtly different. For example, on Solaris, 
+user directories are created in /export/home and then, the automount facility will eventually mount them in /home.
+
+This is because the usual situation is that the home directory may be anywhere on a corporate network, probably on an NFS server, and the home 
+directory will be mounted automatically upon first use.
+
+Linux has these same automount facilities, but many users are not even aware of them, and on self-contained systems, the concept of NFS mounts 
+will probably not apply.
+
+A given user can always substitute the environment variable HOME for their root directory, or the shorthand ~; i.e. the following are equivalent:
+$ ls -l $HOME/public_html
+$ ls -l ~/public_html
+
+
+There is one very important exception: the home directory for the root user on Linux systems is always placed in /root. Other system-provided 
+accounts (such as daemon and bin) can also have directories in locations other than /home.
