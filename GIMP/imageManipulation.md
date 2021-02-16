@@ -1,6 +1,6 @@
 ## WIKI UBUNTU: [GIMP](http://doc.ubuntu-fr.org/gimp)
 
-[README:](https://flatpak.org/setup/) Make sure to follow the setup guide before installing
+Make sure to follow the setup guide before installing [:: README ::](https://flatpak.org/setup/) 
 
 - [stable version](https://www.gimp.org/downloads/)
 
